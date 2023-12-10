@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ShowToastButtonWrapper()
+                    TextFormWrapper()
                 }
             }
         }
@@ -58,7 +58,7 @@ fun TextInputForm() {
 }
 
 @Composable
-fun ShowToastButtonWrapper() {
+fun TextFormWrapper() {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
