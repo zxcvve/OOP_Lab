@@ -42,7 +42,7 @@ fun ShowToastButton(){
         val text = "Hello toast!"
         val duration = Toast.LENGTH_SHORT
 
-        val toast = Toast.makeText(context, text, duration).show()
+        Toast.makeText(context, text, duration).show()
     }) {
         Text("Tap me")
     }
