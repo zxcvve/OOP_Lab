@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextInputForm(
-    onNavigateToSecondScreen: () -> Unit,
+    onNavigateToSecondScreen: (String) -> Unit,
 ) {
     val navController = rememberNavController()
     var textFieldState by remember { mutableStateOf("") }
@@ -62,7 +62,7 @@ fun TextInputForm(
         label = { Text("Label") }
     )
 
-    Button(onClick =  onNavigateToSecondScreen) {
+    Button(onClick = { onNavigateToSecondScreen(textFieldState) }) {
         Text(
             text = "Tap me"
         )
@@ -71,7 +71,7 @@ fun TextInputForm(
 
 @Composable
 fun MainScreen(
-    onNavigateToSecondScreen: () -> Unit,
+    onNavigateToSecondScreen: (String) -> Unit,
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -95,11 +95,12 @@ fun AppNavHost(
     ) {
         composable("start") {
             MainScreen(
-                onNavigateToSecondScreen = { navController.navigate("finish") }
+                onNavigateToSecondScreen = { textRepeatCount -> navController.navigate("finish/$textRepeatCount") }
             )
         }
-        composable("finish"){
-            SecondScreen()
+        composable("finish/{textRepeatCount}") {
+            val textRepeatCount = it.arguments?.getString("textRepeatCount")?.toInt() ?: 0
+            SecondScreen(textRepeatCount)
         }
 
     }
